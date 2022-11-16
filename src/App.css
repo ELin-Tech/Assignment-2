@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+.GameBoard{
+  display: grid;
+  margin-top: 30px;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
