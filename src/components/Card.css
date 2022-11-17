@@ -1,0 +1,14 @@
+.CardBack {
+    height: 150px;
+    width: 150px;
+    border-color:blueviolet;
+  }
+
+  .CardFront {
+    height: 150px;
+    width: 150px;
+  }
+
+  .Card{
+    position: relative;
+  }

@@ -1,17 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-
+import Card from './components/Card';
 const Images = [
-  { "src": "/images/BlobEmoji.png" },
-  { "src": "/images/ConfusedEmoji.png" },
-  { "src": "/images/CoolEmoji.jpg" },
-  { "src": "/images/SadEmoji.png" },
+  { "src": "/images/BlobEmoji.png", matched: false},
+  { "src": "/images/ConfusedEmoji.png", matched: false },
+  { "src": "/images/CoolEmoji.jpg", matched: false },
+  { "src": "/images/SadEmoji.png", matched: false },
 ]
 
 function App() {
-
-  const [Playerturns, Turnupdate] = useState(0)
   const [CardStatus, Cardupdate] = useState([])
+  const [FirstSelect, FirstCardSelect] = useState(null)
+  const NewGame=() => {
+      Turnupdate(LastTurn => LastTurn + 1)
+      SecondCardSelect(null)
+      FirstCardSelect(null)
+
+  }
+  useEffect(() => {
+    if (FirstSelect && SecondSelect) {
+      if (FirstSelect.src === SecondSelect.src) {
+        Cardupdate(LastCard => {
+          return LastCard.map(newCard=> {
+            if (newCard.src === SecondSelect.src){
+              return {...newCard, matched:true}
+            }
+            else {
+              return {...newCard, matched:false}
+            }
+          })
+        } )
+        NewGame()
+      }
+      else {
+        NewGame()
+      }
+    }
+  }, [FirstSelect, SecondSelect])
+  const [Playerturns, Turnupdate] = useState(0)
+  const [SecondSelect, SecondCardSelect] = useState(null)
+  const ClickedCard = (newCard) => {
+     FirstSelect ? SecondCardSelect(newCard) : FirstCardSelect(newCard)
+  }
 
   const newCards = () => {
     const brandnewCards = [...Images, ...Images]
@@ -30,19 +60,15 @@ function App() {
       <button onClick={newCards}>
         Start a new game
       </button>
-    <div className= "GameBoard">
-      {CardStatus.map(newCard => (
-        <div className= "CardonBoard" key={newCard.id}>
-          <div>
-            <img className= "CardFront" src={newCard.src} alt= "Front Pic"/>
-            <img className= "CardBack" src="/images/CardCover.png" alt= "Back Pic"/>
-          </div>
-        </div>
-      ))}
-    </div>
+      <div className="GameBoard">
+        {CardStatus.map(newCard => (
+          <Card key={newCard.id} newCard={newCard} ClickedCard={ClickedCard}/>
+        ))}
+      </div>
     </div>
   );
-}
+
+  }
 
 
 export default App;
