@@ -2,15 +2,17 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Card from './components/Card';
 const Images = [
-  { "src": "/images/BlobEmoji.png", matched: false},
-  { "src": "/images/ConfusedEmoji.png", matched: false },
+  { "src": "/images/SillyEmoji.png", matched: false},
+  { "src": "/images/HeartEmoji.jpg", matched: false },
   { "src": "/images/CoolEmoji.jpg", matched: false },
-  { "src": "/images/SadEmoji.png", matched: false },
+  { "src": "/images/MeltEmoji.jpg", matched: false },
 ]
 
 function App() {
   const [CardStatus, Cardupdate] = useState([])
   const [FirstSelect, FirstCardSelect] = useState(null)
+  const [SecondSelect, SecondCardSelect] = useState(null)
+  const [Playerturns, Turnupdate] = useState(0)
   const NewGame=() => {
       Turnupdate(LastTurn => LastTurn + 1)
       SecondCardSelect(null)
@@ -33,12 +35,10 @@ function App() {
         NewGame()
       }
       else {
-        NewGame()
+       setTimeout(()=> NewGame(), 500)
       }
     }
   }, [FirstSelect, SecondSelect])
-  const [Playerturns, Turnupdate] = useState(0)
-  const [SecondSelect, SecondCardSelect] = useState(null)
   const ClickedCard = (newCard) => {
      FirstSelect ? SecondCardSelect(newCard) : FirstCardSelect(newCard)
   }
@@ -62,7 +62,7 @@ function App() {
       </button>
       <div className="GameBoard">
         {CardStatus.map(newCard => (
-          <Card key={newCard.id} newCard={newCard} ClickedCard={ClickedCard}/>
+          <Card key={newCard.id} newCard={newCard} ClickedCard={ClickedCard} selected={newCard.matched || newCard === SecondSelect || newCard === FirstSelect}/>
         ))}
       </div>
     </div>
