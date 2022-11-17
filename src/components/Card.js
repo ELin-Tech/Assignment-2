@@ -1,11 +1,14 @@
 import './Card.css'
 
-export default function Card({newCard}) {
+export default function Card({newCard, ClickedCard, selected}) {
+  const Clicked= () => {
+      ClickedCard(newCard)
+  }
     return(
         <div className= "CardonBoard" key={newCard.id}>
-          <div>
+          <div className={selected ? "selected" : "" }>
             <img className= "CardFront" src={newCard.src} alt= "Front Pic"/>
-            <img className= "CardBack" src="/images/CardCover.png"  alt= "Back Pic" onClick={Clicked}/>
+            <img className= "CardBack" src="/images/CardCover.png" onClick={Clicked}  alt= "Back Pic"/>
           </div>
         </div>
     )
