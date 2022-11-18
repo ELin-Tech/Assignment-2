@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Card from './components/Card';
 import React from 'react';
+import Kermit from './music/kermitdance.mp4'
 const Images = [
   { "src": "/images/SillyEmoji.png", matched: false },
   { "src": "/images/HeartEmoji.jpg", matched: false },
@@ -13,22 +14,28 @@ const Images = [
   { "src": "/images/SmileEmoji.png", matched: false },
   { "src": "/images/SadEmoji.png", matched: false },
 ]
-
-
 function App() {
-  const [CardStatus, Cardupdate] = useState([])
+  let music = new Audio("/kahoot.mp3")
+  const start = () => {
+    music.play()
+  }
+
+  const stop = () => {
+    music.pause()
+  }
+
   const [FirstSelect, FirstCardSelect] = useState(null)
   const [SecondSelect, SecondCardSelect] = useState(null)
-  const [Playerturns, Turnupdate] = useState(0)
   const [MaxSelect, MaxUpdate] = useState(null)
   const NewGame = () => {
-    Turnupdate(LastTurn => LastTurn + 1)
     SecondCardSelect(null)
     FirstCardSelect(null)
     setTimeout(() => MaxUpdate(false), 20)
   }
+  const [CardStatus, Cardupdate] = useState([])
   useEffect(() => {
-    if (FirstSelect && SecondSelect) {
+    const both = FirstSelect && SecondSelect
+    if (both) {
       MaxUpdate(true)
       if (FirstSelect.src === SecondSelect.src) {
         Cardupdate(LastCard => {
@@ -62,18 +69,37 @@ function App() {
       .sort(() => Math.random() - .5)
       .map((newCard) => ({ ...newCard, id: Math.random() }))
 
-    Turnupdate(0)
     Cardupdate(brandnewCards)
   }
 
   return (
     
     <div className="Intro">
+      <video autoPlay loop muted style={{
+        position: "absolute",
+        width: "100%",
+        left:"50%",
+        top:"50%",
+        height:1600,
+        objectFit:"cover",
+        transform:"translate(-50%, -50%)",
+        zIndex:"-1"
+      }}>
+        <source src={Kermit} type="video/mp4"/>
+      </video>
       <h1>
         Welcome to my matching game!
       </h1>
       <button onClick={newCards}>
         Start a new game
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button onClick={start}>
+        Play some music
+      </button>
+      &nbsp;&nbsp;&nbsp;
+      <button onClick={stop}>
+        Stop music
       </button>
       <div className="GameBoard">
         {CardStatus.map(newCard => (
