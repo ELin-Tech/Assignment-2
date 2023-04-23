@@ -3,19 +3,17 @@ import './App.css';
 import Card from './components/Card';
 import React from 'react';
 import Kermit from './music/kermitdance.mp4'
+import Butterfly from './music/butterfly.mp4'
 const Images = [
-  { "src": "/images/SillyEmoji.png", matched: false },
-  { "src": "/images/HeartEmoji.jpg", matched: false },
-  { "src": "/images/CoolEmoji.jpg", matched: false },
-  { "src": "/images/MeltEmoji.jpg", matched: false },
-  { "src": "/images/BlobEmoji.png", matched: false },
-  { "src": "/images/ConfusedEmoji.png", matched: false },
-  { "src": "/images/ThinkEmoji.png", matched: false },
-  { "src": "/images/SmileEmoji.png", matched: false },
-  { "src": "/images/SadEmoji.png", matched: false },
+  { "src": "/images/Laundry.png", matched: false },
+  { "src": "/images/Fred.jpg", matched: false },
+  { "src": "/images/tweet.jpg", matched: false },
+  { "src": "/images/wiz.jpg", matched: false },
+  { "src": "/images/mbutterfly.jpg", matched: false },
+  { "src": "/images/yellowfact.jpg", matched: false },
 ]
 function App() {
-  let music = new Audio("/kahoot.mp3")
+  let music = new Audio("/california.mp3")
   const start = () => {
     music.play()
   }
@@ -80,15 +78,15 @@ function App() {
         width: "100%",
         left:"50%",
         top:"50%",
-        height:1600,
+        height:1100,
         objectFit:"cover",
         transform:"translate(-50%, -50%)",
         zIndex:"-1"
       }}>
-        <source src={Kermit} type="video/mp4"/>
+        <source src={Butterfly} type="video/mp4"/>
       </video>
       <h1>
-        Welcome to my matching game!
+        Asian Studies Matching Game!
       </h1>
       <button onClick={newCards}>
         Start a new game

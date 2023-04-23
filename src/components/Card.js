@@ -11,7 +11,7 @@ export default function Card({ newCard, ClickedCard, selected, MaxSelect}) {
     <div className="CardonBoard" key={newCard.id}>
       <div className={selected ? "selected" : ""}>
         <img className="CardFront" src={newCard.src} alt="Front Pic" />
-        <img className="CardBack" src="/images/CardCover.png" onClick={Clicked} alt="Back Pic" />
+        <img className="CardBack" src="/images/asian_studies.png" onClick={Clicked} alt="Back Pic" />
       </div>
     </div>
   )
