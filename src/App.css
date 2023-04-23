@@ -1,7 +1,16 @@
 .App {
   text-align: center;
+  font-weight: bold;
+}
+h1{
+  font-weight: bold;
+  font-size: 40px;
 }
 
+button{
+  font-weight: bold;
+  font-size: 20px;
+}
 h1{
   font-size: 44px;
   color: bisque;
